@@ -31,7 +31,6 @@ header.postHeader:empty + article h1 {
   outline: none;
   text-decoration: underline;
   overflow: hidden;
-  position: relative;
   transition: outline-offset 0.2s ease-in-out;
 }
 
@@ -263,6 +262,12 @@ header.postHeader:empty + article h1 {
 
   .navSearchWrapper:after {
     left: 35px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .reactNavSearchWrapper input#search_input_react {
+    background: rgba(0, 0, 0, 0.2);
   }
 }
 
