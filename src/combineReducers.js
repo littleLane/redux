@@ -128,6 +128,7 @@ export default function combineReducers(reducers) {
       finalReducers[key] = reducers[key]
     }
   }
+
   const finalReducerKeys = Object.keys(finalReducers)
 
   // This is used to make sure we don't warn about the same

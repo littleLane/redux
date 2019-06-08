@@ -15,8 +15,11 @@ describe('Utils', () => {
           action.type === 'push' ? [...state, action.value] : state
       })
 
+      // { counter: 1, stack: [] }
       const s1 = reducer({}, { type: 'increment' })
       expect(s1).toEqual({ counter: 1, stack: [] })
+
+      // { counter: 1: stack: ['a'] }
       const s2 = reducer(s1, { type: 'push', value: 'a' })
       expect(s2).toEqual({ counter: 1, stack: ['a'] })
     })
@@ -29,6 +32,7 @@ describe('Utils', () => {
         stack: (state = []) => state
       })
 
+      // ['stack']
       expect(Object.keys(reducer({}, { type: 'push' }))).toEqual(['stack'])
     })
 

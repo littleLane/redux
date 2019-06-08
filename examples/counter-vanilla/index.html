@@ -15,6 +15,9 @@
       </p>
     </div>
     <script>
+      var unsubscribeFunc
+
+      // reducer
       function counter(state, action) {
         if (typeof state === 'undefined') {
           return 0
@@ -30,15 +33,26 @@
         }
       }
 
-      var store = Redux.createStore(counter)
+      // store
+      var store = Redux.createStore(counter, 100)
+
       var valueEl = document.getElementById('value')
 
       function render() {
-        valueEl.innerHTML = store.getState().toString()
+        // 获取最新的 state
+        const currentState = store.getState()
+
+        if (currentState === 110) {
+          unsubscribeFunc && unsubscribeFunc()
+        }
+
+        valueEl.innerHTML = currentState.toString()
       }
 
       render()
-      store.subscribe(render)
+
+      // 订阅函数，当状态变化时执行渲染函数，并返回取消订阅函数
+      unsubscribeFunc = store.subscribe(render)
 
       document.getElementById('increment')
         .addEventListener('click', function () {

@@ -18,6 +18,8 @@ import compose from './compose'
  */
 export default function applyMiddleware(...middlewares) {
   return createStore => (...args) => {
+    // 这里的 ...args 可能包含的参数有 reducer、preloadedState、enhancer
+    // 和我们调用 createStore 创建 store 时传递的参数一致
     const store = createStore(...args)
     let dispatch = () => {
       throw new Error(
@@ -30,6 +32,9 @@ export default function applyMiddleware(...middlewares) {
       getState: store.getState,
       dispatch: (...args) => dispatch(...args)
     }
+
+    // 中间件执行后的一个数组
+    // 最后会调用 store.dispatch
     const chain = middlewares.map(middleware => middleware(middlewareAPI))
     dispatch = compose(...chain)(store.dispatch)
 
